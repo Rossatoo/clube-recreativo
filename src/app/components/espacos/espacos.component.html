@@ -1,39 +1,70 @@
 <div class="espacos-container">
-  <h1 class="page-title">Espaços Disponíveis</h1>
-  
-  <div *ngIf="loading" class="loading-container">
-    <div class="spinner"></div>
-    <p>Carregando espaços...</p>
-  </div>
-  
-  <div *ngIf="error" class="error-container">
-    <p>Ocorreu um erro ao carregar os espaços. Por favor, tente novamente mais tarde.</p>
-    <button (click)="carregarEspacos()" class="btn-retry">Tentar Novamente</button>
-  </div>
-  
-  <div *ngIf="!loading && !error" class="espacos-grid">
-    <div *ngFor="let espaco of espacos" class="espaco-card">
-      <div class="espaco-image" [style.backgroundImage]="'url(' + espaco.imagemUrl + ')'"></div>
-      <div class="espaco-info">
-        <h2 class="espaco-title">{{ espaco.nome }}</h2>
-        <p class="espaco-description">{{ espaco.descricao }}</p>
-        <div class="espaco-details">
-          <span class="espaco-capacity">
-            <i class="fas fa-users"></i> Capacidade: {{ espaco.capacidade }} pessoas
-          </span>
-          <span class="espaco-price">
-            <i class="fas fa-tag"></i> R$ {{ espaco.valorDiaria.toFixed(2) }}/dia
-          </span>
-        </div>
-        <div class="espaco-actions">
-          <a [routerLink]="['/espacos', espaco.id]" class="btn-details">Ver Detalhes</a>
-          <a [routerLink]="['/reservar', espaco.id]" class="btn-reserve">Reservar</a>
-        </div>
+  <div class="container">
+    <div class="espacos-header">
+      <h1>Espaços Disponíveis</h1>
+      <p>Encontre o espaço perfeito para o seu evento</p>
+    </div>
+    
+    <div *ngIf="loading" class="loading-container">
+      <div class="spinner"></div>
+      <p>Carregando espaços...</p>
+    </div>
+    
+    <div *ngIf="error" class="error-container">
+      <div class="error-content">
+        <i class="fas fa-exclamation-circle error-icon"></i>
+        <h3>Ops! Algo deu errado</h3>
+        <p>Não foi possível carregar os espaços. Por favor, tente novamente.</p>
+        <button (click)="carregarEspacos()" class="btn btn-primary">Tentar Novamente</button>
       </div>
     </div>
-  </div>
-  
-  <div *ngIf="!loading && !error && espacos.length === 0" class="empty-state">
-    <p>Nenhum espaço disponível no momento.</p>
+    
+    <div *ngIf="!loading && !error">
+      <div class="espacos-filters">
+        <div class="search-box">
+          <i class="fas fa-search search-icon"></i>
+          <input 
+            type="text" 
+            placeholder="Buscar espaços..." 
+            class="search-input"
+            [(ngModel)]="searchTerm"
+            (input)="filtrarEspacos()"
+          >
+        </div>
+      </div>
+      
+      <div *ngIf="espacosFiltrados.length > 0" class="espacos-grid">
+        <div *ngFor="let espaco of espacosFiltrados" class="espaco-card">
+          <div class="espaco-image" [style.backgroundImage]="'url(' + espaco.imagemUrl + ')'">
+            <div class="espaco-badge" *ngIf="espaco.disponivel">Disponível</div>
+          </div>
+          <div class="espaco-content">
+            <h3 class="espaco-title">{{ espaco.nome }}</h3>
+            <p class="espaco-description">{{ espaco.descricao }}</p>
+            <div class="espaco-meta">
+              <div class="meta-item">
+                <i class="fas fa-users"></i>
+                <span>{{ espaco.capacidade }} pessoas</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-tag"></i>
+                <span>R$ {{ espaco.valorDiaria.toFixed(2) }}/dia</span>
+              </div>
+            </div>
+            <div class="espaco-actions">
+              <a [routerLink]="['/espacos', espaco.id]" class="btn btn-outline">Ver Detalhes</a>
+              <a [routerLink]="['/reservar', espaco.id]" class="btn btn-primary">Reservar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div *ngIf="!loading && !error && espacosFiltrados.length === 0" class="empty-state">
+        <i class="fas fa-search empty-icon"></i>
+        <h3>Nenhum espaço encontrado</h3>
+        <p>Tente ajustar sua busca ou explore outras opções.</p>
+        <button (click)="limparFiltros()" class="btn btn-primary">Limpar Filtros</button>
+      </div>
+    </div>
   </div>
 </div>

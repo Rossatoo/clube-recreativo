@@ -1,53 +1,75 @@
 <div class="login-container">
-  <div class="login-card">
-    <h2 class="login-title">Login</h2>
-    
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input 
-          type="email" 
-          id="email" 
-          formControlName="email" 
-          class="form-control" 
-          [ngClass]="{ 'is-invalid': f['email'].touched && f['email'].errors }"
-        >
-        <div *ngIf="f['email'].touched && f['email'].errors" class="error-message">
-          <div *ngIf="f['email'].errors['required']">Email é obrigatório</div>
-          <div *ngIf="f['email'].errors['email']">Email inválido</div>
+  <div class="container">
+    <div class="login-card">
+      <div class="login-header">
+        <h1>Login</h1>
+        <p>Acesse sua conta para gerenciar suas reservas</p>
+      </div>
+      
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <div class="input-wrapper">
+            <i class="fas fa-envelope input-icon"></i>
+            <input 
+              type="email" 
+              id="email" 
+              formControlName="email" 
+              class="form-control" 
+              placeholder="Seu email"
+              [ngClass]="{ 'is-invalid': f['email'].touched && f['email'].errors }"
+            >
+          </div>
+          <div *ngIf="f['email'].touched && f['email'].errors" class="error-message">
+            <div *ngIf="f['email'].errors['required']">Email é obrigatório</div>
+            <div *ngIf="f['email'].errors['email']">Email inválido</div>
+          </div>
         </div>
-      </div>
-      
-      <div class="form-group">
-        <label for="password">Senha</label>
-        <input 
-          type="password" 
-          id="password" 
-          formControlName="password" 
-          class="form-control" 
-          [ngClass]="{ 'is-invalid': f['password'].touched && f['password'].errors }"
-        >
-        <div *ngIf="f['password'].touched && f['password'].errors" class="error-message">
-          <div *ngIf="f['password'].errors['required']">Senha é obrigatória</div>
+        
+        <div class="form-group">
+          <label for="password">Senha</label>
+          <div class="input-wrapper">
+            <i class="fas fa-lock input-icon"></i>
+            <input 
+              type="password" 
+              id="password" 
+              formControlName="password" 
+              class="form-control" 
+              placeholder="Sua senha"
+              [ngClass]="{ 'is-invalid': f['password'].touched && f['password'].errors }"
+            >
+          </div>
+          <div *ngIf="f['password'].touched && f['password'].errors" class="error-message">
+            <div *ngIf="f['password'].errors['required']">Senha é obrigatória</div>
+          </div>
         </div>
-      </div>
-      
-      <div *ngIf="error" class="alert alert-danger">
-        {{ error }}
-      </div>
-      
-      <div class="form-group">
-        <button type="submit" [disabled]="loginForm.invalid || loading" class="btn-login">
-          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-          Entrar
-        </button>
-      </div>
+        
+        <div *ngIf="error" class="alert-error">
+          <i class="fas fa-exclamation-circle"></i>
+          <span>{{ error }}</span>
+        </div>
+        
+        <div class="form-actions">
+          <button type="submit" [disabled]="loginForm.invalid || loading" class="btn btn-primary btn-block">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm"></span>
+            <span *ngIf="!loading">Entrar</span>
+          </button>
+        </div>
+      </form>
       
       <div class="login-info">
-        <p>Para fins de demonstração, use:</p>
-        <p><strong>Admin:</strong> email / admin123</p>
-        <p><strong>Usuário:</strong> email / usuario123</p>
+        <h3>Credenciais de Demonstração</h3>
+        <div class="demo-credentials">
+          <div class="credential-item">
+            <span class="credential-label">Admin:</span>
+            <span class="credential-value">adminexemplo.com / admin123</span>
+          </div>
+          <div class="credential-item">
+            <span class="credential-label">Usuário:</span>
+            <span class="credential-value">usuarioexemplo.com / usuario123</span>
+          </div>
+        </div>
       </div>
-    </form>
+    </div>
   </div>
 </div>

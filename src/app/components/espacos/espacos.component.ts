@@ -9,8 +9,10 @@ import { Espaco } from '../../models/espaco.model';
 })
 export class EspacosComponent implements OnInit {
   espacos: Espaco[] = [];
+  espacosFiltrados: Espaco[] = [];
   loading = true;
   error = false;
+  searchTerm = '';
 
   constructor(private espacoService: EspacoService) {}
 
@@ -23,6 +25,7 @@ export class EspacosComponent implements OnInit {
     this.espacoService.getEspacos().subscribe({
       next: (espacos) => {
         this.espacos = espacos;
+        this.espacosFiltrados = [...espacos];
         this.loading = false;
       },
       error: (err) => {
@@ -31,5 +34,23 @@ export class EspacosComponent implements OnInit {
         this.loading = false;
       }
     });
+  }
+  
+  filtrarEspacos(): void {
+    if (!this.searchTerm.trim()) {
+      this.espacosFiltrados = [...this.espacos];
+      return;
+    }
+    
+    const term = this.searchTerm.toLowerCase().trim();
+    this.espacosFiltrados = this.espacos.filter(espaco => 
+      espaco.nome.toLowerCase().includes(term) || 
+      espaco.descricao.toLowerCase().includes(term)
+    );
+  }
+  
+  limparFiltros(): void {
+    this.searchTerm = '';
+    this.filtrarEspacos();
   }
 }
