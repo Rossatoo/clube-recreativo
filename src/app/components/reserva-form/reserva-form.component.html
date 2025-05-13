@@ -1,0 +1,100 @@
+<div class="reserva-container">
+  <h1 class="page-title">Reservar Espaço</h1>
+  
+  <div *ngIf="loading" class="loading-container">
+    <div class="spinner"></div>
+    <p>Carregando informações do espaço...</p>
+  </div>
+  
+  <div *ngIf="error" class="error-container">
+    <p>{{ error }}</p>
+    <button routerLink="/espacos" class="btn-voltar">Voltar para Espaços</button>
+  </div>
+  
+  <div *ngIf="!loading && !error && espaco" class="reserva-content">
+    <div class="espaco-info-card">
+      <div class="espaco-image" [style.backgroundImage]="'url(' + espaco.imagemUrl + ')'"></div>
+      <div class="espaco-details">
+        <h2>{{ espaco.nome }}</h2>
+        <p class="espaco-description">{{ espaco.descricao }}</p>
+        <div class="espaco-meta">
+          <div class="meta-item">
+            <i class="fas fa-users"></i>
+            <span>Capacidade: {{ espaco.capacidade }} pessoas</span>
+          </div>
+          <div class="meta-item">
+            <i class="fas fa-tag"></i>
+            <span>Valor: R$ {{ espaco.valorDiaria.toFixed(2) }}/dia</span>
+          </div>
+        </div>
+        <div class="recursos-list">
+          <h3>Recursos Inclusos:</h3>
+          <ul>
+            <li *ngFor="let recurso of espaco.recursos">{{ recurso }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <div class="reserva-form-card">
+      <h2>Fazer Reserva</h2>
+      
+      <div *ngIf="success" class="success-message">
+        <p>Reserva realizada com sucesso! Você será redirecionado para suas reservas em instantes.</p>
+      </div>
+      
+      <form *ngIf="!success" [formGroup]="reservaForm" (ngSubmit)="onSubmit()" class="reserva-form">
+        <div class="form-group">
+          <label for="dataInicio">Data de Início</label>
+          <input 
+            type="date" 
+            id="dataInicio" 
+            formControlName="dataInicio" 
+            class="form-control" 
+            [ngClass]="{ 'is-invalid': f['dataInicio'].touched && f['dataInicio'].errors }"
+          >
+          <div *ngIf="f['dataInicio'].touched && f['dataInicio'].errors" class="error-message">
+            <div *ngIf="f['dataInicio'].errors['required']">Data de início é obrigatória</div>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="dataFim">Data de Término</label>
+          <input 
+            type="date" 
+            id="dataFim" 
+            formControlName="dataFim" 
+            class="form-control" 
+            [ngClass]="{ 'is-invalid': f['dataFim'].touched && f['dataFim'].errors }"
+          >
+          <div *ngIf="f['dataFim'].touched && f['dataFim'].errors" class="error-message">
+            <div *ngIf="f['dataFim'].errors['required']">Data de término é obrigatória</div>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="observacoes">Observações</label>
+          <textarea 
+            id="observacoes" 
+            formControlName="observacoes" 
+            class="form-control" 
+            rows="4"
+            placeholder="Informe detalhes adicionais sobre sua reserva..."
+          ></textarea>
+        </div>
+        
+        <div class="valor-total">
+          <h3>Valor Total: R$ {{ calcularValorTotal().toFixed(2) }}</h3>
+        </div>
+        
+        <div class="form-actions">
+          <button type="button" routerLink="/espacos" class="btn-cancelar">Cancelar</button>
+          <button type="submit" [disabled]="reservaForm.invalid || submitting" class="btn-reservar">
+            <span *ngIf="submitting" class="spinner-border spinner-border-sm mr-1"></span>
+            Confirmar Reserva
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

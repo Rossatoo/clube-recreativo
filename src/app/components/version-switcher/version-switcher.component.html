@@ -1,0 +1,6 @@
+<div class="version-switcher">
+  <label for="version-select">Versão:</label>
+  <select id="version-select" [value]="selectedVersion" (change)="onVersionChange($event)">
+    <option *ngFor="let version of versions" [value]="version">{{ version }}</option>
+  </select>
+</div>

@@ -1,0 +1,86 @@
+<div class="home-container">
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">Encontre o espaço perfeito para seus eventos</h1>
+        <p class="hero-subtitle">Espaços modernos e bem equipados para todos os tipos de eventos</p>
+        <div class="hero-actions">
+          <a routerLink="/espacos" class="btn btn-primary">Ver Espaços</a>
+          <a routerLink="/login" class="btn btn-outline">Fazer Login</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="features-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Por que escolher nosso clube?</h2>
+        <p>Oferecemos a melhor experiência para seus eventos</p>
+      </div>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-calendar-check"></i>
+          </div>
+          <h3>Reserva Simplificada</h3>
+          <p>Processo de reserva rápido e sem complicações</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-map-marked-alt"></i>
+          </div>
+          <h3>Localização Privilegiada</h3>
+          <p>Fácil acesso e amplo estacionamento</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-star"></i>
+          </div>
+          <h3>Estrutura Completa</h3>
+          <p>Espaços equipados com tudo que você precisa</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="spaces-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Espaços em Destaque</h2>
+        <p>Conheça alguns dos nossos espaços mais populares</p>
+      </div>
+      
+      <div class="spaces-grid">
+        <div *ngFor="let destaque of destaques" class="space-card">
+          <div class="space-image" [style.backgroundImage]="'url(' + destaque.imagemUrl + ')'">
+            <div class="space-overlay">
+              <a [routerLink]="['/espacos', destaque.id]" class="btn btn-primary">Ver Detalhes</a>
+            </div>
+          </div>
+          <div class="space-content">
+            <h3>{{ destaque.nome }}</h3>
+            <p>{{ destaque.descricao }}</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="section-footer">
+        <a routerLink="/espacos" class="btn btn-outline">Ver Todos os Espaços</a>
+      </div>
+    </div>
+  </section>
+  
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-content">
+        <h2>Pronto para reservar seu espaço?</h2>
+        <p>Faça sua reserva agora mesmo e garanta o melhor espaço para seu evento</p>
+        <a routerLink="/espacos" class="btn btn-primary">Reservar Agora</a>
+      </div>
+    </div>
+  </section>
+</div>

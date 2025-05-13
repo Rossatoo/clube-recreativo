@@ -1,0 +1,23 @@
+.version-switcher {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  
+  label {
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  select {
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    background-color: white;
+    
+    &:focus {
+      outline: none;
+      border-color: #0077b6;
+    }
+  }
+}

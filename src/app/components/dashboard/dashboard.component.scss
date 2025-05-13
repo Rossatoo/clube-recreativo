@@ -1,0 +1,258 @@
+.dashboard-container {
+  padding: 20px 0;
+}
+
+.page-title {
+  color: #0077b6;
+  margin-bottom: 30px;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+  
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(0, 119, 182, 0.1);
+    border-radius: 50%;
+    border-top-color: #0077b6;
+    animation: spin 1s ease-in-out infinite;
+    margin-bottom: 15px;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+}
+
+.error-container {
+  text-align: center;
+  padding: 30px;
+  background-color: #fff3f3;
+  border-radius: 8px;
+  margin: 20px 0;
+  
+  p {
+    color: #d32f2f;
+    margin-bottom: 15px;
+  }
+  
+  .btn-retry {
+    background-color: #0077b6;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    
+    &:hover {
+      background-color: #005b8a;
+    }
+  }
+}
+
+.dashboard-content {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.estatisticas-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  
+  .estatistica-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    
+    &.total {
+      border-left: 4px solid #0077b6;
+      .estatistica-icon {
+        background-color: rgba(0, 119, 182, 0.1);
+        color: #0077b6;
+      }
+    }
+    
+    &.pendentes {
+      border-left: 4px solid #f57c00;
+      .estatistica-icon {
+        background-color: rgba(245, 124, 0, 0.1);
+        color: #f57c00;
+      }
+    }
+    
+    &.confirmadas {
+      border-left: 4px solid #2e7d32;
+      .estatistica-icon {
+        background-color: rgba(46, 125, 50, 0.1);
+        color: #2e7d32;
+      }
+    }
+    
+    &.canceladas {
+      border-left: 4px solid #c62828;
+      .estatistica-icon {
+        background-color: rgba(198, 40, 40, 0.1);
+        color: #c62828;
+      }
+    }
+    
+    .estatistica-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+      i {
+        font-size: 24px;
+      }
+    }
+    
+    .estatistica-info {
+      h3 {
+        font-size: 1rem;
+        color: #666;
+        margin-bottom: 5px;
+      }
+      
+      .estatistica-valor {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: #333;
+      }
+    }
+  }
+}
+
+.reservas-recentes {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  
+  h2 {
+    color: #0077b6;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+  }
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.reservas-table {
+  width: 100%;
+  border-collapse: collapse;
+  
+  th, td {
+    padding: 12px 15px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #f5f5f5;
+    color: #333;
+    font-weight: 500;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  tr:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .status-badge {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    
+    &.status-confirmada {
+      background-color: #e8f5e9;
+      color: #2e7d32;
+    }
+    
+    &.status-pendente {
+      background-color: #fff8e1;
+      color: #f57c00;
+    }
+    
+    &.status-cancelada {
+      background-color: #ffebee;
+      color: #c62828;
+    }
+  }
+  
+  .acoes {
+    display: flex;
+    gap: 10px;
+    
+    button {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      
+      &.btn-confirmar {
+        background-color: #e8f5e9;
+        color: #2e7d32;
+        
+        &:hover {
+          background-color: #c8e6c9;
+        }
+      }
+      
+      &.btn-cancelar {
+        background-color: #ffebee;
+        color: #c62828;
+        
+        &:hover {
+          background-color: #ffcdd2;
+        }
+      }
+    }
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 30px;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .estatisticas-cards {
+    grid-template-columns: 1fr;
+  }
+  
+  .reservas-table {
+    th, td {
+      padding: 8px;
+    }
+  }
+}

@@ -1,0 +1,44 @@
+<div class="calendario-container">
+  <div class="calendario-header">
+    <button class="btn-nav" (click)="mesAnterior()">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <span class="mes-ano">{{ getNomeMes() }}</span>
+    <button class="btn-nav" (click)="proximoMes()">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+  </div>
+  
+  <div class="calendario-dias-semana">
+    <div class="dia-semana" *ngFor="let dia of diasDaSemana">{{ dia }}</div>
+  </div>
+  
+  <div class="calendario-dias">
+    <div 
+      *ngFor="let dia of diasDoMes" 
+      class="dia" 
+      [class.outro-mes]="dia.outroMes"
+      [class.hoje]="dia.hoje"
+      [class.selecionavel]="dia.selecionavel"
+      [class.nao-selecionavel]="!dia.selecionavel"
+      (click)="selecionarData(dia)"
+    >
+      {{ dia.diaDoMes }}
+    </div>
+  </div>
+  
+  <div class="calendario-legenda">
+    <div class="legenda-item">
+      <div class="legenda-cor hoje"></div>
+      <span>Hoje</span>
+    </div>
+    <div class="legenda-item">
+      <div class="legenda-cor selecionavel"></div>
+      <span>Disponível</span>
+    </div>
+    <div class="legenda-item">
+      <div class="legenda-cor nao-selecionavel"></div>
+      <span>Indisponível</span>
+    </div>
+  </div>
+</div>

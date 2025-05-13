@@ -1,0 +1,115 @@
+<div class="dashboard-container">
+  <h1 class="page-title">Dashboard Administrativo</h1>
+  
+  <div *ngIf="loading" class="loading-container">
+    <div class="spinner"></div>
+    <p>Carregando dados...</p>
+  </div>
+  
+  <div *ngIf="error" class="error-container">
+    <p>Ocorreu um erro ao carregar os dados. Por favor, tente novamente mais tarde.</p>
+    <button (click)="carregarDados()" class="btn-retry">Tentar Novamente</button>
+  </div>
+  
+  <div *ngIf="!loading && !error" class="dashboard-content">
+    <div class="estatisticas-cards">
+      <div class="estatistica-card total">
+        <div class="estatistica-icon">
+          <i class="fas fa-calendar-check"></i>
+        </div>
+        <div class="estatistica-info">
+          <h3>Total de Reservas</h3>
+          <p class="estatistica-valor">{{ totalReservas }}</p>
+        </div>
+      </div>
+      
+      <div class="estatistica-card pendentes">
+        <div class="estatistica-icon">
+          <i class="fas fa-clock"></i>
+        </div>
+        <div class="estatistica-info">
+          <h3>Pendentes</h3>
+          <p class="estatistica-valor">{{ reservasPendentes }}</p>
+        </div>
+      </div>
+      
+      <div class="estatistica-card confirmadas">
+        <div class="estatistica-icon">
+          <i class="fas fa-check-circle"></i>
+        </div>
+        <div class="estatistica-info">
+          <h3>Confirmadas</h3>
+          <p class="estatistica-valor">{{ reservasConfirmadas }}</p>
+        </div>
+      </div>
+      
+      <div class="estatistica-card canceladas">
+        <div class="estatistica-icon">
+          <i class="fas fa-times-circle"></i>
+        </div>
+        <div class="estatistica-info">
+          <h3>Canceladas</h3>
+          <p class="estatistica-valor">{{ reservasCanceladas }}</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="reservas-recentes">
+      <h2>Reservas Recentes</h2>
+      
+      <div class="table-responsive">
+        <table class="reservas-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Espaço</th>
+              <th>Usuário</th>
+              <th>Data Início</th>
+              <th>Data Fim</th>
+              <th>Valor</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let reserva of reservas">
+              <td>{{ reserva.id }}</td>
+              <td>{{ getNomeEspaco(reserva.espacoId) }}</td>
+              <td>{{ reserva.usuarioNome }}</td>
+              <td>{{ formatarData(reserva.dataInicio) }}</td>
+              <td>{{ formatarData(reserva.dataFim) }}</td>
+              <td>R$ {{ reserva.valorTotal.toFixed(2) }}</td>
+              <td>
+                <span [ngClass]="getStatusClass(reserva.status)" class="status-badge">
+                  {{ reserva.status | titlecase }}
+                </span>
+              </td>
+              <td class="acoes">
+                <button 
+                  *ngIf="reserva.status === 'pendente'" 
+                  (click)="confirmarReserva(reserva.id!)" 
+                  class="btn-confirmar"
+                  title="Confirmar Reserva"
+                >
+                  <i class="fas fa-check"></i>
+                </button>
+                <button 
+                  *ngIf="reserva.status === 'pendente' || reserva.status === 'confirmada'" 
+                  (click)="cancelarReserva(reserva.id!)" 
+                  class="btn-cancelar"
+                  title="Cancelar Reserva"
+                >
+                  <i class="fas fa-times"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <div *ngIf="reservas.length === 0" class="empty-state">
+        <p>Nenhuma reserva encontrada.</p>
+      </div>
+    </div>
+  </div>
+</div>

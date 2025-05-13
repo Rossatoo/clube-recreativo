@@ -1,0 +1,12 @@
+<form class="search-form" (ngSubmit)="onSubmit()">
+  <input 
+    type="text" 
+    [(ngModel)]="searchTerm" 
+    name="searchTerm"
+    placeholder="Buscar espaços..." 
+    class="search-input"
+  >
+  <button type="submit" class="search-button">
+    <i class="fas fa-search"></i>
+  </button>
+</form>

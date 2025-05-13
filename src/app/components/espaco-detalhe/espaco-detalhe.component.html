@@ -1,0 +1,46 @@
+<div class="espaco-detalhe-container">
+  <h1 class="page-title">Detalhes do Espaço</h1>
+  
+  <div *ngIf="loading" class="loading-container">
+    <div class="spinner"></div>
+    <p>Carregando informações do espaço...</p>
+  </div>
+  
+  <div *ngIf="error" class="error-container">
+    <p>Ocorreu um erro ao carregar as informações do espaço. Por favor, tente novamente mais tarde.</p>
+    <button routerLink="/espacos" class="btn-voltar">Voltar para Espaços</button>
+  </div>
+  
+  <div *ngIf="!loading && !error && espaco" class="espaco-content">
+    <div class="espaco-header">
+      <div class="espaco-image" [style.backgroundImage]="'url(' + espaco.imagemUrl + ')'"></div>
+      <div class="espaco-info">
+        <h2>{{ espaco.nome }}</h2>
+        <div class="espaco-meta">
+          <span class="meta-item">
+            <i class="fas fa-users"></i> Capacidade: {{ espaco.capacidade }} pessoas
+          </span>
+          <span class="meta-item">
+            <i class="fas fa-tag"></i> R$ {{ espaco.valorDiaria.toFixed(2) }}/dia
+          </span>
+        </div>
+        <div class="espaco-actions">
+          <a [routerLink]="['/reservar', espaco.id]" class="btn-reservar">Reservar Agora</a>
+          <a routerLink="/espacos" class="btn-voltar">Voltar</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="espaco-description">
+      <h3>Descrição</h3>
+      <p>{{ espaco.descricao }}</p>
+    </div>
+    
+    <div class="espaco-recursos">
+      <h3>Recursos Disponíveis</h3>
+      <ul class="recursos-list">
+        <li *ngFor="let recurso of espaco.recursos">{{ recurso }}</li>
+      </ul>
+    </div>
+  </div>
+</div>

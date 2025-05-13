@@ -1,0 +1,60 @@
+<div class="reservas-container">
+  <h1 class="page-title">Minhas Reservas</h1>
+  
+  <div *ngIf="loading" class="loading-container">
+    <div class="spinner"></div>
+    <p>Carregando suas reservas...</p>
+  </div>
+  
+  <div *ngIf="error" class="error-container">
+    <p>Ocorreu um erro ao carregar suas reservas. Por favor, tente novamente mais tarde.</p>
+    <button (click)="carregarReservas()" class="btn-retry">Tentar Novamente</button>
+  </div>
+  
+  <div *ngIf="!loading && !error">
+    <div *ngIf="reservas.length === 0" class="empty-state">
+      <p>Você ainda não possui reservas.</p>
+      <a routerLink="/espacos" class="btn-reservar">Reservar um Espaço</a>
+    </div>
+    
+    <div *ngIf="reservas.length > 0" class="reservas-list">
+      <div *ngFor="let reserva of reservas" class="reserva-card">
+        <div class="reserva-header">
+          <h2>{{ reserva.espacoNome }}</h2>
+          <span [ngClass]="getStatusClass(reserva.status)" class="reserva-status">
+            {{ reserva.status | titlecase }}
+          </span>
+        </div>
+        
+        <div class="reserva-details">
+          <div class="detail-item">
+            <span class="label">Data de Início:</span>
+            <span class="value">{{ formatarData(reserva.dataInicio) }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="label">Data de Término:</span>
+            <span class="value">{{ formatarData(reserva.dataFim) }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="label">Valor Total:</span>
+            <span class="value">R$ {{ reserva.valorTotal.toFixed(2) }}</span>
+          </div>
+          <div *ngIf="reserva.observacoes" class="detail-item full-width">
+            <span class="label">Observações:</span>
+            <span class="value">{{ reserva.observacoes }}</span>
+          </div>
+        </div>
+        
+        <div class="reserva-actions">
+          <button 
+            *ngIf="reserva.status === 'pendente'" 
+            (click)="cancelarReserva(reserva.id!)" 
+            class="btn-cancelar"
+          >
+            Cancelar Reserva
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

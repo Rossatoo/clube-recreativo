@@ -5,6 +5,8 @@
   "projects": {
     "clube-recreativo": {
       "projectType": "application",
+      "root": "src",
+      "sourceRoot": "src/app",
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
@@ -90,12 +92,16 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
             ],
             "scripts": []
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "c10f60f4-9603-4bc4-8036-1d08a76e6e65"
   }
 }
