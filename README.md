@@ -1,27 +1,22 @@
 # ClubeRecreativo
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.12.
+## Tela Home 
+![Image](https://github.com/Rossatoo/clube-recreativo/issues/1#issue-3060444514)
+<br>
 
-## Development server
+## Tela Home 2
+![Image](https://github.com/Rossatoo/clube-recreativo/issues/2#issue-3060447018)
+<br>
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Tela Espacos
+![Image](https://github.com/Rossatoo/clube-recreativo/issues/3#issue-3060448242)
+<br>
 
-## Code scaffolding
+## Tela Detalhe Espacos
+![Image](https://github.com/Rossatoo/clube-recreativo/issues/4#issue-3060449950)
+<br>
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Tela Reserva Espaco
+![Image](https://github.com/Rossatoo/clube-recreativo/issues/5#issue-3060451250)
+<br>
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
