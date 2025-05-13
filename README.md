@@ -17,6 +17,6 @@
 <br>
 
 ## Tela Reserva Espaco
-![Image]([https://github.com/Rossatoo/clube-recreativo/issues/5#issue-3060451250](https://github.com/Rossatoo/clube-recreativo/issues/5#issue-3060451250))
+![Image](https://private-user-images.githubusercontent.com/102099800/443280353-d8e80b54-c20a-4de2-bf2f-1f7d1a1eb118.png?)
 <br>
 
